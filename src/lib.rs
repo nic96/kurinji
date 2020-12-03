@@ -1,29 +1,18 @@
 // publics
-pub use self::
-{
-    kurinji::Kurinji,
-
-    axis::MouseAxis,
-    axis::GamepadAxis,
-    
-    bindings::Bindings,
-    
-    event_phase::EventPhase,
-    
-    action_event::OnActionBegin,
-    action_event::OnActionActive,
-    action_event::OnActionProgress,
-    action_event::OnActionEnd,
+pub use self::{
+    action_event::OnActionActive, action_event::OnActionBegin, action_event::OnActionEnd,
+    action_event::OnActionProgress, axis::GamepadAxis, axis::MouseAxis, bindings::Bindings,
+    event_phase::EventPhase, kurinji::Kurinji,
 };
 
 // crates
-mod axis;
-mod util;
-mod stack;
-mod bindings;
-mod kurinji;
-mod event_phase;
 mod action_event;
+mod axis;
+mod bindings;
+mod event_phase;
+mod kurinji;
+mod stack;
+mod util;
 
 mod action;
 mod gamepad;
@@ -32,7 +21,7 @@ mod mouse;
 mod serde;
 
 use bevy::app::prelude::*;
-use bevy::ecs::IntoQuerySystem;
+use bevy::ecs::IntoSystem;
 
 /// Adds input mapping (via code or json/ron) to an App
 #[derive(Default)]

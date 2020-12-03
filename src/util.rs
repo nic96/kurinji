@@ -1,4 +1,4 @@
-use crate::{GamepadAxis, Kurinji, bindings::Bindings, serde::BindingsSerdeHelper};
+use crate::{bindings::Bindings, serde::BindingsSerdeHelper, GamepadAxis, Kurinji};
 
 use bevy::prelude::*;
 use std::{collections::HashMap, fs};
@@ -23,16 +23,15 @@ impl Kurinji {
     }
 
     // crate
-    pub(crate) fn is_gamepad_axis_positive(axis: GamepadAxis) -> bool
-    {
+    pub(crate) fn is_gamepad_axis_positive(axis: GamepadAxis) -> bool {
         return axis == GamepadAxis::LeftStickXPositive
-        || axis == GamepadAxis::LeftStickYPositive
-        || axis == GamepadAxis::LeftZPositive
-        || axis == GamepadAxis::RightStickXPositive
-        || axis == GamepadAxis::RightStickYPositive
-        || axis == GamepadAxis::RightZPositive
-        || axis == GamepadAxis::DPadXPositive
-        || axis == GamepadAxis::DPadYPositive;
+            || axis == GamepadAxis::LeftStickYPositive
+            || axis == GamepadAxis::LeftZPositive
+            || axis == GamepadAxis::RightStickXPositive
+            || axis == GamepadAxis::RightStickYPositive
+            || axis == GamepadAxis::RightZPositive
+            || axis == GamepadAxis::DPadXPositive
+            || axis == GamepadAxis::DPadYPositive;
     }
 
     pub(crate) fn get_bevy_gamepad_axis_type_from_pad_axis(
@@ -63,7 +62,7 @@ impl Kurinji {
             GamepadAxis::DPadYPositive => bevy::input::gamepad::GamepadAxisType::DPadY,
             GamepadAxis::DPadYNegative => bevy::input::gamepad::GamepadAxisType::DPadY,
         }
-    } 
+    }
 }
 
 impl BindingsSerdeHelper {
@@ -71,12 +70,10 @@ impl BindingsSerdeHelper {
     pub fn get_gamepad_button_hash_map_from_json_friendly_map(
         json_map: HashMap<usize, HashMap<GamepadButtonType, String>>,
     ) -> HashMap<(usize, GamepadButtonType), String> {
-        let mut result: HashMap<(usize, GamepadButtonType), String>  = HashMap::new();
+        let mut result: HashMap<(usize, GamepadButtonType), String> = HashMap::new();
         for (player, h_map) in json_map {
             for (btn_type, action) in h_map {
-                result
-                    .entry((player, btn_type))
-                    .or_insert(action);
+                result.entry((player, btn_type)).or_insert(action);
             }
         }
         result
@@ -141,8 +138,5 @@ pub(crate) fn clamp(min: f32, max: f32, value: f32) -> f32 {
 }
 
 pub(crate) fn clamp_vec2(min: Vec2, max: Vec2, value: Vec2) -> Vec2 {
-    Vec2::new(
-        clamp(min.x(), max.x(), value.x()),
-        clamp(min.y(), max.y(), value.y()),
-    )
+    Vec2::new(clamp(min.x, max.x, value.x), clamp(min.y, max.y, value.y))
 }

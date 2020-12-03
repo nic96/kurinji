@@ -1,9 +1,9 @@
-use crate::{MouseAxis, Kurinji, util::clamp_vec2};
+use crate::{util::clamp_vec2, Kurinji, MouseAxis};
 
-use bevy::{math::Vec2, prelude::MouseButton};
 use bevy::app::{EventReader, Events};
 use bevy::ecs::{Local, Res, ResMut};
 use bevy::input::{mouse::MouseMotion, Input};
+use bevy::{math::Vec2, prelude::MouseButton};
 
 #[derive(Default)]
 pub struct MouseMoveState {
@@ -58,8 +58,8 @@ impl Kurinji {
             let max = Vec2::one();
             let normalised_vec = clamp_vec2(min, max, value.delta * 0.1);
 
-            let x = normalised_vec.x();
-            let y = normalised_vec.y();
+            let x = normalised_vec.x;
+            let y = normalised_vec.y;
 
             // horizontal
             if x > 0.0 {
